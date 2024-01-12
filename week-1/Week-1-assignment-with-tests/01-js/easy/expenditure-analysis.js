@@ -9,7 +9,55 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  return [];
+  let spendEstimate  = {};
+
+  for(var i = 0; i < transactions.length; i++) {
+    let category = transactions[i].category;
+    let price = transactions[i].price
+    if(spendEstimate[category]) {
+      spendEstimate[category] = spendEstimate[category] + price;
+      
+    }
+    else {
+      spendEstimate[category] = price;
+    }
+  }
+  //console.log("category",category, price);
+  var keys = Object.keys(spendEstimate);
+  let ans = [];
+  for(var j = 0; j < keys.length; j++) {
+    var obj = {
+      category: keys[j],
+      totalSpent: spendEstimate[keys[j]]
+    }
+    ans.push(obj);
+  }
+  //console.log("ans", ans)
+  return ans;
+
 }
 
 module.exports = calculateTotalSpentByCategory;
+
+// let spend = {};
+// for(let proparty in transactions) {
+//   if(spend[proparty.category]) {
+//     spend[proparty.category] = spend[proparty.category] + proparty.price;
+//   }
+//   else {
+//     spend[proparty.category] = proparty.price;
+//   }
+// }
+// console.log(spend);
+// var keys = Object.keys(spend);
+//  console.log("ans is",ans);
+// var ans = [];
+// for(var i in keys) {
+//   var category = i;
+//   var obj = {
+//     category: category,
+//     totalSpent: spend[category]
+//   }
+//   ans.push(obj);
+// }
+// return ans;
